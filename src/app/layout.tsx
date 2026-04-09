@@ -53,7 +53,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${cover.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <Script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module" strategy="beforeInteractive" />
         <NuqsAdapter>{children}</NuqsAdapter>
         <Toaster />

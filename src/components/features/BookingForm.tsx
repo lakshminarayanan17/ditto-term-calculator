@@ -99,7 +99,7 @@ export function BookingForm({
         <button
           type="button"
           onClick={onBack}
-          className="mb-4 flex items-center gap-1.5 text-[15px] text-[#1a1a1a] opacity-70 transition-opacity hover:opacity-100"
+          className="mb-4 flex items-center gap-1.5 text-[14px] text-[#1a1a1a] transition-opacity hover:opacity-70"
         >
           <Image src="/icons/arrow-back.svg" alt="" width={12} height={11} />
           <span className="font-heading">Go back</span>
@@ -107,107 +107,105 @@ export function BookingForm({
       )}
 
       {/* Yellow summary banner */}
-      <div className="relative h-[134px] overflow-hidden rounded-[18px] border border-[#fff7ce] bg-ditto-yellow px-5 pt-5">
+      <div className="relative overflow-hidden rounded-[16px] border border-[#fff7ce] bg-ditto-yellow px-5 pb-5 pt-5">
         <Image
           src="/icons/lightning-large.png"
           alt=""
-          width={86}
-          height={86}
+          width={92}
+          height={92}
           className="absolute right-0 top-0"
         />
-        <h3 className="relative z-10 text-[20px] font-semibold leading-tight tracking-tight text-[#33383b]">
+        <h3 className="relative z-10 text-[18px] font-semibold leading-tight tracking-tight text-[#33383b] lg:text-[20px]">
           {insuranceLabel} Insurance Advice
         </h3>
         <div className="relative z-10 mt-4 flex gap-4 sm:gap-8">
           <div>
-            <div className="flex items-center gap-1.5 opacity-70">
-              <Image src="/icons/calendar-date.svg" alt="" width={18} height={18} className="-mt-1" />
-              <span className="font-heading text-[14px] text-[#1a1a1a]">{selectedDayName}</span>
+            <div className="flex items-center gap-1.5">
+              <Image src="/icons/calendar-date.svg" alt="" width={16} height={16} className="shrink-0 lg:h-[18px] lg:w-[18px]" />
+              <span className="font-heading text-[13px] leading-none text-[#646259] lg:text-[14px] lg:text-[#1a1a1a] lg:opacity-70">{selectedDayName}</span>
             </div>
-            <p className="mt-1 font-heading text-[19px] font-medium text-[#2c2e30]">
+            <p className="mt-1 font-heading text-[17px] font-medium text-[#2c2e30] lg:text-[19px]">
               {selectedDate}
             </p>
           </div>
           <div>
-            <div className="flex items-center gap-1.5 opacity-70">
-              <Image src="/icons/clock-time.svg" alt="" width={18} height={18} className="-mt-0.5" />
-              <span className="font-heading text-[14px] text-[#1a1a1a]">Timing</span>
+            <div className="flex items-center gap-1.5">
+              <Image src="/icons/clock-time.svg" alt="" width={16} height={16} className="shrink-0 lg:h-[18px] lg:w-[18px]" />
+              <span className="font-heading text-[13px] leading-none text-[#646259] lg:text-[14px] lg:text-[#1a1a1a] lg:opacity-70">Time</span>
             </div>
             <div className="mt-1 flex items-baseline gap-2">
               <TimePart value={selectedTimeStart} />
-              <span className="font-heading text-[20px] text-[#1a1a1a]">→</span>
+              <span className="font-heading text-[18px] text-[#1a1a1a] lg:text-[20px]">→</span>
               <TimePart value={selectedTimeEnd} />
             </div>
           </div>
         </div>
       </div>
 
-      {/* Form fields — wrapped in white card on mobile */}
-      <div className="mt-5 rounded-[24px] bg-white p-5 lg:mt-5 lg:rounded-none lg:bg-transparent lg:p-0">
-        <div className="flex flex-col gap-[18px]" role="group" aria-label="Contact details">
-          <FormField fieldId="field-name" icon={<Image src="/icons/user.svg" alt="" width={20} height={20} />} error={errors.name?.message}>
-            <input
-              {...register("name")}
-              id="field-name"
-              aria-label="Full name"
-              aria-describedby={errors.name ? "field-name-error" : undefined}
-              aria-invalid={!!errors.name}
-              placeholder="Enter your Name"
-              className="w-full bg-transparent font-heading text-base text-[#222223] placeholder:text-[#999] focus:outline-none"
-            />
-          </FormField>
+      {/* Form fields */}
+      <div className="mt-5 flex flex-col gap-[14px]">
+        <FormField fieldId="field-name" icon={<Image src="/icons/user.svg" alt="" width={20} height={20} />} error={errors.name?.message}>
+          <input
+            {...register("name")}
+            id="field-name"
+            aria-label="Full name"
+            aria-describedby={errors.name ? "field-name-error" : undefined}
+            aria-invalid={!!errors.name}
+            placeholder="Enter your Name"
+            className="w-full bg-transparent font-heading text-base text-[#222223] placeholder:text-[#999] focus:outline-none"
+          />
+        </FormField>
 
-          <FormField fieldId="field-phone" prefix={"+91\u00a0-\u00a0"} icon={<Image src="/icons/mobile-phone.svg" alt="" width={18} height={20} />} error={errors.phone?.message}>
-            <input
-              {...register("phone")}
-              id="field-phone"
-              aria-label="Phone number"
-              aria-describedby={errors.phone ? "field-phone-error" : undefined}
-              aria-invalid={!!errors.phone}
-              type="tel"
-              inputMode="numeric"
-              maxLength={10}
-              placeholder="Mobile Number"
-              className="w-full bg-transparent font-heading text-base text-[#222223] placeholder:text-[#999] focus:outline-none"
-            />
-          </FormField>
+        <FormField fieldId="field-phone" prefix={"+91\u00a0-\u00a0"} icon={<Image src="/icons/mobile-phone.svg" alt="" width={18} height={20} />} error={errors.phone?.message}>
+          <input
+            {...register("phone")}
+            id="field-phone"
+            aria-label="Phone number"
+            aria-describedby={errors.phone ? "field-phone-error" : undefined}
+            aria-invalid={!!errors.phone}
+            type="tel"
+            inputMode="numeric"
+            maxLength={10}
+            placeholder="Mobile Number"
+            className="w-full bg-transparent font-heading text-base text-[#222223] placeholder:text-[#999] focus:outline-none"
+          />
+        </FormField>
 
-          <FormField fieldId="field-email" icon={<Image src="/icons/email.svg" alt="" width={20} height={20} />} error={errors.email?.message}>
-            <input
-              {...register("email")}
-              id="field-email"
-              aria-label="Email address"
-              aria-describedby={errors.email ? "field-email-error" : undefined}
-              aria-invalid={!!errors.email}
-              type="email"
-              placeholder="Email Address"
-              className="w-full bg-transparent font-heading text-base text-[#222223] placeholder:text-[#999] focus:outline-none"
-            />
-          </FormField>
+        <FormField fieldId="field-email" icon={<Image src="/icons/email.svg" alt="" width={20} height={20} />} error={errors.email?.message}>
+          <input
+            {...register("email")}
+            id="field-email"
+            aria-label="Email address"
+            aria-describedby={errors.email ? "field-email-error" : undefined}
+            aria-invalid={!!errors.email}
+            type="email"
+            placeholder="Email Address"
+            className="w-full bg-transparent font-heading text-base text-[#222223] placeholder:text-[#999] focus:outline-none"
+          />
+        </FormField>
 
-          <div>
-            <div className="overflow-hidden rounded-2xl border-[1.5px] border-[#eeeeef]">
-              <textarea
-                {...register("note")}
-                aria-label="Additional notes"
-                placeholder="Enter your query"
-                className="h-[80px] w-full resize-none bg-white px-4 py-3.5 font-heading text-base text-[#222223] placeholder:text-[#999] focus:outline-none"
-              />
-            </div>
+        <div>
+          <div className="overflow-hidden rounded-[14px] border-[1.5px] border-[#eeeeef]">
+            <textarea
+              {...register("note")}
+              aria-label="Additional notes"
+              placeholder="Enter your query"
+              className="h-[80px] w-full resize-none bg-white px-4 py-3.5 font-heading text-base text-[#222223] placeholder:text-[#999] focus:outline-none"
+            />
           </div>
         </div>
+      </div>
 
-        {/* Submit button */}
-        <div className="mt-5">
-          <button
-            type="submit"
-            disabled={isSubmitting || submitDisabled}
-            className="flex h-[62px] w-full items-center justify-between rounded-[18px] bg-ditto-blue-dark px-6 font-heading text-xl font-medium text-white shadow-[0px_6px_12px_0px_rgba(30,37,75,0.06)] transition-colors hover:bg-ditto-blue-active disabled:opacity-50"
-          >
-            <span>Schedule a Free Call</span>
-            <Image src="/icons/phone-calendar.svg" alt="" width={21} height={20} />
-          </button>
-        </div>
+      {/* Submit button */}
+      <div className="mt-5">
+        <button
+          type="submit"
+          disabled={isSubmitting || submitDisabled}
+          className="flex h-[62px] w-full items-center justify-between rounded-[18px] bg-ditto-blue-dark px-6 font-heading text-xl font-medium text-white shadow-[0px_6px_12px_0px_rgba(30,37,75,0.06)] transition-colors hover:bg-ditto-blue-active disabled:opacity-50"
+        >
+          <span>Schedule a Free Call</span>
+          <Image src="/icons/phone-calendar.svg" alt="" width={21} height={20} />
+        </button>
       </div>
     </form>
   );
@@ -262,10 +260,10 @@ function FormField({
 function TimePart({ value }: { value: string }) {
   const parts = value.split(" ");
   if (parts.length < 2) {
-    return <span className="font-heading text-[19px] font-medium text-[#1a1a1a]">{value}</span>;
+    return <span className="font-heading text-[17px] font-medium text-[#1a1a1a] lg:text-[19px]">{value}</span>;
   }
   return (
-    <span className="font-heading text-[19px] font-medium text-[#1a1a1a]">
+    <span className="font-heading text-[17px] font-medium text-[#1a1a1a] lg:text-[19px]">
       {parts[0]} <sup className="text-[11px]">{parts[1]}</sup>
     </span>
   );

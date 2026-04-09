@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
+import { useSquircle } from "@/hooks/useSquircle";
 import Image from "next/image";
 import { X } from "lucide-react";
 import {
@@ -14,10 +15,8 @@ import {
 import {
   Drawer,
   DrawerContent,
-  DrawerHeader,
   DrawerTitle,
   DrawerDescription,
-  DrawerClose,
 } from "@/components/ui/drawer";
 import { BookingForm } from "./BookingForm";
 import {
@@ -63,6 +62,7 @@ export function MoreSlotsDrawer({ open, onOpenChange, activeTab, onScheduleSucce
   const dates = getNextSixDays();
   const [selectedDateIndex, setSelectedDateIndex] = useState(0);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const squircleRef = useSquircle(44, 0.6);
 
   const selectedDate = dates[selectedDateIndex];
 
@@ -78,75 +78,61 @@ export function MoreSlotsDrawer({ open, onOpenChange, activeTab, onScheduleSucce
     onScheduleSuccess?.(slot);
   };
 
-  const content = (
-    <>
-      {/* Slot picker */}
-      <div className="flex-1 px-5 py-6 lg:overflow-y-auto lg:px-10 lg:py-10">
-        {/* Date row */}
-        <div className="flex gap-3 overflow-x-auto pb-2">
-          {dates.map((date, i) => (
-            <DatePill
-              key={i}
-              label={getDayAbbreviation(date, i === 0)}
-              dayNumber={date.getDate()}
-              selected={i === selectedDateIndex}
-              onClick={() => handleDateChange(i)}
-            />
-          ))}
-        </div>
+  const dayAbbr = getDayName(selectedDate).slice(0, 3);
+  const ctaLabel = selectedTime ? `Confirm ${dayAbbr}, ${selectedTime} Call` : "Confirm Call";
 
-        <p className="mt-6 font-heading text-[17px] text-[#1f2127] lg:mt-8 lg:text-[18px]">
-          What time works for you?
-        </p>
-
-        <SlotSection icon="/icons/sunrise.svg" label="Morning" slots={MORNING_SLOTS} selectedDate={selectedDate} selectedTime={selectedTime} onSelect={setSelectedTime} />
-        <SlotSection icon="/icons/sun-afternoon.svg" label="Afternoon" slots={AFTERNOON_SLOTS} selectedDate={selectedDate} selectedTime={selectedTime} onSelect={setSelectedTime} />
-        <SlotSection icon="/icons/sunset.svg" label="Evening" slots={EVENING_SLOTS} selectedDate={selectedDate} selectedTime={selectedTime} onSelect={setSelectedTime} />
-
-        <p className="mt-6 text-[13px] leading-relaxed text-[#7b838c] lg:mt-8 lg:text-[14px]">
-          Average call usually lasts 30 minutes.
-          <br />
-          That is enough time to get all your queries addressed.
-        </p>
+  const slotPicker = (
+    <div className="flex-1 px-5 py-6 lg:overflow-y-auto lg:px-10 lg:py-10">
+      {/* Date row */}
+      <div className="flex gap-2 overflow-x-auto pb-2 lg:gap-3">
+        {dates.map((date, i) => (
+          <DatePill
+            key={i}
+            label={getDayAbbreviation(date, i === 0)}
+            dayNumber={date.getDate()}
+            selected={i === selectedDateIndex}
+            onClick={() => handleDateChange(i)}
+          />
+        ))}
       </div>
 
-      {/* Form card (hidden on mobile bottom sheet, shown on desktop) */}
-      {!isMobile && (
-        <>
-          <div className="w-px bg-[#eef0f2] lg:block" />
-          <div className="m-10 w-[411px] shrink-0 self-start overflow-y-auto rounded-[30px] border border-[#fbfbfb] bg-white shadow-[0px_4px_13px_0px_rgba(0,0,0,0.03)]">
-            <BookingForm
-              insuranceType={activeTab}
-              selectedDate={formatDateDisplay(selectedDate)}
-              selectedDayName={getDayName(selectedDate)}
-              selectedTimeStart={selectedTime ?? "—"}
-              selectedTimeEnd={selectedTime ? getSlotEndTime(selectedTime) : "—"}
-              submitDisabled={!selectedTime}
-              onSuccess={handleSuccess}
-            />
-          </div>
-        </>
-      )}
+      <p className="mt-6 font-heading text-[14px] text-[#1f2127] lg:mt-8 lg:text-[18px]">
+        What time works for you?
+      </p>
 
-      {/* Mobile: inline submit button after slots */}
-      {isMobile && selectedTime && (
-        <div className="border-t border-[#eef0f2] px-5 py-4">
-          <button
-            onClick={() => {
-              handleSuccess({
-                date: formatDateDisplay(selectedDate),
-                dayName: getDayName(selectedDate),
-                timeStart: selectedTime,
-                timeEnd: getSlotEndTime(selectedTime),
-              });
-            }}
-            className="flex h-[56px] w-full items-center justify-between rounded-[18px] bg-ditto-blue-dark px-6 font-heading text-lg font-medium text-white shadow-[0px_6px_12px_0px_rgba(30,37,75,0.06)]"
-          >
-            <span>Confirm {selectedTime}</span>
-            <Image src="/icons/phone-calendar.svg" alt="" width={21} height={20} />
-          </button>
-        </div>
-      )}
+      <SlotSection icon="/icons/sunrise.svg" label="Morning" slots={MORNING_SLOTS} selectedDate={selectedDate} selectedTime={selectedTime} onSelect={setSelectedTime} />
+      <SlotSection icon="/icons/sun-afternoon.svg" label="Noon" slots={AFTERNOON_SLOTS} selectedDate={selectedDate} selectedTime={selectedTime} onSelect={setSelectedTime} />
+      <SlotSection icon="/icons/sunset.svg" label="Evening" slots={EVENING_SLOTS} selectedDate={selectedDate} selectedTime={selectedTime} onSelect={setSelectedTime} />
+
+      <p className="mt-6 text-[13px] leading-relaxed text-[#7b838c] lg:mt-8 lg:text-[14px]">
+        Average call usually lasts 30 minutes.
+        <br />
+        That is enough time to get all your queries addressed.
+      </p>
+    </div>
+  );
+
+  const desktopFormPanel = !isMobile ? (
+    <>
+      <div className="w-px bg-[#eef0f2] lg:block" />
+      <div className="m-6 w-[411px] shrink-0 self-start overflow-y-auto rounded-[30px] border border-[#fbfbfb] bg-white shadow-[0px_4px_13px_0px_rgba(0,0,0,0.03)]">
+        <BookingForm
+          insuranceType={activeTab}
+          selectedDate={formatDateDisplay(selectedDate)}
+          selectedDayName={getDayName(selectedDate)}
+          selectedTimeStart={selectedTime ?? "—"}
+          selectedTimeEnd={selectedTime ? getSlotEndTime(selectedTime) : "—"}
+          submitDisabled={!selectedTime}
+          onSuccess={handleSuccess}
+        />
+      </div>
+    </>
+  ) : null;
+
+  const content = (
+    <>
+      {slotPicker}
+      {desktopFormPanel}
     </>
   );
 
@@ -154,25 +140,46 @@ export function MoreSlotsDrawer({ open, onOpenChange, activeTab, onScheduleSucce
   if (isMobile) {
     return (
       <Drawer open={open} onOpenChange={onOpenChange}>
-        <DrawerContent className="max-h-[85vh]">
+        <DrawerContent className="flex max-h-[90vh] flex-col bg-white p-0">
+          <DrawerTitle className="sr-only">Other Available Slots</DrawerTitle>
           <DrawerDescription className="sr-only">
             Pick a preferred time slot for your insurance consultation call.
           </DrawerDescription>
-          <DrawerHeader className="flex flex-row items-center justify-between border-b border-[#eef0f2] px-5 py-4">
-            <DrawerTitle className="font-heading text-[20px] font-medium tracking-tight text-[#1f2127]">
-              More Slots
-            </DrawerTitle>
-            <DrawerClose asChild>
-              <button
-                className="flex h-[34px] w-[34px] items-center justify-center rounded-full bg-[#f9f9f9]"
-                aria-label="Close"
-              >
-                <X className="h-5 w-5 text-[#1f2127]" />
-              </button>
-            </DrawerClose>
-          </DrawerHeader>
-          <div className="overflow-y-auto">
-            {content}
+
+          {/* Scrollable slot area */}
+          <div className="min-h-0 flex-1 overflow-y-auto">
+            <div className="px-5 pb-4 pt-5">
+              <p className="font-heading text-[16px] font-medium text-[#33383b]">Other Available Slots</p>
+            </div>
+            {slotPicker}
+          </div>
+
+          {/* Fixed CTA */}
+          <div className="shrink-0 bg-white px-5 pb-7 pt-3">
+            <button
+              onClick={() => {
+                if (!selectedTime) return;
+                handleSuccess({
+                  date: formatDateDisplay(selectedDate),
+                  dayName: getDayName(selectedDate),
+                  timeStart: selectedTime,
+                  timeEnd: getSlotEndTime(selectedTime),
+                });
+              }}
+              className={`flex h-[45px] w-full items-center justify-between rounded-[12px] px-5 font-heading text-base font-medium text-white transition-colors ${
+                selectedTime
+                  ? "bg-[#0771e9] shadow-[0px_4px_12px_rgba(7,113,233,0.25)]"
+                  : "cursor-default bg-[#c8e1ff]"
+              }`}
+            >
+              <span>{ctaLabel}</span>
+              <Image
+                src="/icons/phone-calendar.svg"
+                alt=""
+                width={19}
+                height={19}
+              />
+            </button>
           </div>
         </DrawerContent>
       </Drawer>
@@ -182,27 +189,30 @@ export function MoreSlotsDrawer({ open, onOpenChange, activeTab, onScheduleSucce
   /* ─── Desktop: Centered Dialog ─── */
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent showCloseButton={false} className="!max-w-none sm:!max-w-none !w-[calc(100vw-400px)] !min-w-[1000px] max-h-[90vh] gap-0 overflow-hidden rounded-[24px] !ring-0 bg-[#fdfdfd] p-0 shadow-[0px_-5px_18px_rgba(92,102,110,0.05),0px_3px_35px_rgba(92,102,110,0.04),0px_30px_40px_rgba(92,102,110,0.18)]">
-        <DialogDescription className="sr-only">
-          Pick a preferred time slot for your insurance consultation call.
-        </DialogDescription>
-        <DialogHeader className="flex flex-row items-center justify-between border-b border-[#eef0f2] px-9 py-6">
-          <DialogTitle className="font-heading text-[22px] font-medium tracking-tight text-[#1f2127]">
-            More Slots
-          </DialogTitle>
-          <DialogClose
-            render={
-              <button
-                className="flex h-[34px] w-[34px] items-center justify-center rounded-full bg-[#f9f9f9] transition-colors hover:bg-[#eee]"
-                aria-label="Close"
-              />
-            }
-          >
-            <X className="h-5 w-5 text-[#1f2127]" />
-          </DialogClose>
-        </DialogHeader>
-        <div className="flex overflow-hidden" style={{ maxHeight: "calc(90vh - 80px)" }}>
-          {content}
+      <DialogContent showCloseButton={false} className="!max-w-none sm:!max-w-none !w-[calc(100vw-400px)] !min-w-[1000px] max-h-[90vh] gap-0 !overflow-hidden !rounded-[44px] !ring-0 bg-transparent p-0 shadow-[0px_-5px_18px_rgba(92,102,110,0.05),0px_3px_35px_rgba(92,102,110,0.04),0px_30px_40px_rgba(92,102,110,0.18)]">
+        {/* Inner wrapper applies squircle clip-path for iOS-style smooth corners */}
+        <div ref={squircleRef as React.RefObject<HTMLDivElement>} className="flex max-h-[90vh] flex-col overflow-hidden bg-[#fdfdfd]">
+          <DialogDescription className="sr-only">
+            Pick a preferred time slot for your insurance consultation call.
+          </DialogDescription>
+          <DialogHeader className="flex flex-row items-center justify-between border-b border-[#eef0f2] px-9 py-6">
+            <DialogTitle className="font-heading text-[22px] font-medium tracking-tight text-[#1f2127]">
+              More Slots
+            </DialogTitle>
+            <DialogClose
+              render={
+                <button
+                  className="flex h-[34px] w-[34px] items-center justify-center rounded-full bg-[#f9f9f9] transition-colors hover:bg-[#eee]"
+                  aria-label="Close"
+                />
+              }
+            >
+              <X className="h-5 w-5 text-[#1f2127]" />
+            </DialogClose>
+          </DialogHeader>
+          <div className="flex overflow-hidden" style={{ maxHeight: "calc(90vh - 80px)" }}>
+            {content}
+          </div>
         </div>
       </DialogContent>
     </Dialog>
@@ -225,16 +235,16 @@ function DatePill({
   return (
     <button
       onClick={onClick}
-      className={`flex h-[63px] w-[65px] shrink-0 flex-col items-center justify-center rounded-[12px] transition-all ${
+      className={`flex h-[45px] w-[46px] shrink-0 flex-col items-center justify-center rounded-[12px] transition-all lg:h-[63px] lg:w-[65px] ${
         selected
           ? "bg-[#1f2127] text-white shadow-[0px_1px_3px_rgba(0,0,0,0.08),0px_6px_9px_rgba(0,0,0,0.04)]"
-          : "border border-[#e3e7ed] bg-white text-[#1f2127] shadow-[0px_1px_3px_rgba(0,0,0,0.08),0px_6px_9px_rgba(0,0,0,0.04)] hover:bg-[#f5f5f5]"
+          : "border border-[#e3e7ed] bg-[#fcfcfc] text-[#1f2127] shadow-[0px_1px_3px_rgba(0,0,0,0.08),0px_6px_9px_rgba(0,0,0,0.04)] hover:bg-[#f5f5f5]"
       }`}
     >
-      <span className={`text-[11px] ${selected ? "text-white" : "text-[#a9adb7]"}`}>
+      <span className={`text-[9px] lg:text-[11px] ${selected ? "text-white" : "text-[#a9adb7]"}`}>
         {label}
       </span>
-      <span className="font-heading text-[21px] font-medium tracking-tight">
+      <span className="font-heading text-[15px] font-medium tracking-tight lg:text-[21px]">
         {dayNumber}
       </span>
     </button>
@@ -273,7 +283,7 @@ function SlotSection({
               key={slot}
               disabled={disabled}
               onClick={() => onSelect(slot)}
-              className={`flex h-[30px] w-[80px] items-center justify-center rounded-[10.6px] text-[13px] transition-all ${
+              className={`flex h-[30px] w-[67px] items-center justify-center rounded-[10px] text-[11px] transition-all lg:w-[80px] lg:text-[13px] ${
                 active
                   ? "bg-[#1f2127] font-medium text-white"
                   : disabled

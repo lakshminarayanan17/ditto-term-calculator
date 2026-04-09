@@ -92,6 +92,32 @@
   --ring: oklch(0.556 0 0);
 }
 
+/* ─── Badge text gradient sweep (Quick Expert Guidance) ─── */
+@keyframes badge-text-sweep {
+  from { background-position: 100% center; }
+  to   { background-position: 0% center; }
+}
+
+.badge-text-animate {
+  background: linear-gradient(
+    to right,
+    #1f2127 0%,
+    #1f2127 25%,
+    #2563eb 33%,
+    #7c3aed 42%,
+    #ec4899 52%,
+    #ff385c 63%,
+    #ff6b35 72%,
+    #1f2127 82%,
+    #1f2127 100%
+  );
+  background-size: 400% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: badge-text-sweep 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
