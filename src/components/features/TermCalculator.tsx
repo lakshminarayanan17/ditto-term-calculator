@@ -1299,62 +1299,72 @@ function MultiPlanResults({ values }: { values: FormValues }) {
 
 function PlanCard({ plan }: { plan: Plan }) {
   return (
-    <div className="overflow-hidden rounded-[18px] border border-[#f0f0f0] bg-white">
+    <div className="overflow-hidden rounded-[18px] border border-[#efefef] bg-white">
       {/* Header */}
-      <div className="flex items-start gap-3 bg-[#f8fbfe] p-4">
+      <div className="flex items-center gap-3 bg-[#f5faff] px-4 py-[14px]">
         <div
-          className="flex h-[45px] w-[45px] shrink-0 items-center justify-center rounded-[8px] border-[1.5px] border-[#f4f8fc]"
-          style={{ background: plan.iconBg }}
+          className="flex h-[42px] w-[42px] shrink-0 items-center justify-center rounded-[10px] border border-[#e9eef5] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.03)]"
         >
-          <span className="font-heading text-[17px] font-bold" style={{ color: plan.iconColor }}>
+          <span className="font-heading text-[18px] font-bold leading-none" style={{ color: plan.iconColor }}>
             {plan.iconText}
           </span>
         </div>
-        <div className="flex-1">
-          <p className="font-heading text-[11px] font-medium text-[#79787b]">{plan.productLabel}</p>
-          <p className="font-heading text-[15px] font-medium leading-tight text-[#2e2e30] lg:text-[16px]">
+        <div className="min-w-0 flex-1">
+          <p className="font-heading text-[10px] font-medium uppercase tracking-wide text-[#8a8a8c]">
+            {plan.productLabel}
+          </p>
+          <p className="mt-[2px] truncate font-heading text-[15px] font-semibold leading-tight text-[#17191c]">
             {plan.name}
           </p>
         </div>
-        <div className="text-right">
-          <p className="font-heading text-[15px] font-bold text-[#2e2e30] lg:text-[16px]">
+        <div className="shrink-0 text-right">
+          <p className="font-heading text-[15px] font-bold leading-none text-[#17191c]">
             ₹{plan.perYear.toLocaleString("en-IN")}/yr
           </p>
-          <p className="font-heading text-[11px] text-[#79787b]">
+          <p className="mt-[3px] font-heading text-[11px] leading-none text-[#79787b]">
             ₹{plan.perMonth.toLocaleString("en-IN")}/mo
           </p>
         </div>
       </div>
 
-      {/* Offerings */}
+      {/* Body */}
       <div className="px-4 pb-4 pt-3">
-        <p className="font-heading text-[13px] font-medium text-[#79787b]">Key offerings</p>
-        <div className="mt-2 flex flex-wrap gap-2">
+        <p className="font-heading text-[12px] font-medium text-[#79787b]">Key offerings</p>
+        <div className="mt-2 grid grid-cols-2 gap-2">
           {plan.offerings.map((o) => (
             <span
               key={o}
-              className="rounded-[8px] bg-[#f5f5f5] px-2.5 py-1.5 font-heading text-[12px] text-[#2e2e30]"
+              className="rounded-[8px] bg-[#f5f5f5] px-2.5 py-[7px] text-center font-heading text-[12px] leading-tight text-[#2e2e30]"
             >
               {o}
             </span>
           ))}
         </div>
 
+        <div className="mt-[14px] h-px w-full bg-[#f1f1f1]" />
+
         {/* Action buttons */}
-        <div className="mt-4 flex gap-2.5">
+        <div className="mt-3 flex gap-2.5">
           <button
             type="button"
-            className="flex h-[40px] flex-1 items-center justify-center gap-1.5 rounded-[10px] bg-[#dbedff] font-heading text-[13px] font-medium text-[#066ce1] transition-colors hover:bg-[#c5e1ff]"
+            className="flex h-[38px] flex-1 items-center justify-center gap-1.5 rounded-[10px] bg-[#e5f0ff] font-heading text-[13px] font-medium text-[#066ce1] transition-colors hover:bg-[#d4e5fb]"
           >
             Plan Details
-            <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><path d="M5 6h6M5 9h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden>
+              <rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>
+              <path d="M5 6h6M5 9h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+            </svg>
           </button>
           <button
             type="button"
-            className="flex h-[40px] flex-1 items-center justify-center gap-1.5 rounded-[10px] bg-ditto-blue font-heading text-[13px] font-medium text-white transition-colors hover:bg-ditto-blue-dark"
+            className="flex h-[38px] flex-1 items-center justify-center gap-1.5 rounded-[10px] bg-ditto-blue font-heading text-[13px] font-medium text-white transition-colors hover:bg-ditto-blue-dark"
           >
             Buy Now
-            <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M2 3h2l1.5 8h7l1.5-6H5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/><circle cx="6" cy="13.5" r="1" fill="currentColor"/><circle cx="12" cy="13.5" r="1" fill="currentColor"/></svg>
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden>
+              <path d="M2 3h2l1.5 8h7l1.5-6H5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <circle cx="6" cy="13.5" r="1" fill="currentColor"/>
+              <circle cx="12" cy="13.5" r="1" fill="currentColor"/>
+            </svg>
           </button>
         </div>
       </div>
