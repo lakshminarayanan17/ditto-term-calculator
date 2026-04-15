@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import { Flame, ChevronDown, ChevronUp, Info, Check } from "lucide-react";
 
 /* ─── Types ─── */
@@ -351,9 +352,9 @@ export function TermCalculator() {
                 <button
                   type="submit"
                   disabled={!canSubmit || status === "loading"}
-                  className={`flex h-[52px] w-full items-center justify-center rounded-[14px] font-heading text-[17px] font-medium tracking-tight text-white transition-colors lg:h-[50px] lg:w-[253px] lg:text-[17px] ${
+                  className={`flex h-[52px] w-full items-center justify-center rounded-[14px] font-heading text-[17px] font-medium tracking-tight text-white transition-colors lg:h-[56px] lg:w-[253px] lg:text-[18px] ${
                     canSubmit && status !== "loading"
-                      ? "bg-ditto-blue shadow-[0px_2px_8px_rgba(8,123,246,0.25)] hover:bg-ditto-blue-dark"
+                      ? "bg-[#087bf6] hover:bg-[#005cc6]"
                       : "cursor-not-allowed bg-[#b7daff]"
                   }`}
                 >
@@ -827,7 +828,7 @@ function CapIcon() {
 /* ─── Divider ─── */
 
 function Divider({ className = "" }: { className?: string }) {
-  return <div className={`h-px w-full bg-[#f0f0f0] ${className}`} />;
+  return <div className={`h-px w-full bg-[#eee] ${className}`} />;
 }
 
 /* ─── FieldBlock ─── */
@@ -1231,12 +1232,9 @@ function LoadingResultCard() {
 
 type Plan = {
   id: string;
-  insurer: string;
   productLabel: string;
   name: string;
-  iconBg: string;
-  iconText: string;
-  iconColor: string;
+  logo: string;
   perYear: number;
   perMonth: number;
   offerings: string[];
@@ -1247,36 +1245,27 @@ function MultiPlanResults({ values }: { values: FormValues }) {
   const plans: Plan[] = [
     {
       id: "axis",
-      insurer: "Axis Smart Life",
       productLabel: "Axis Smart Life",
       name: "Smart Secure Plus",
-      iconBg: "#fff",
-      iconText: "A",
-      iconColor: "#ae275f",
+      logo: "/logos/axis.png",
       perYear: basePremium + 1000,
       perMonth: Math.round((basePremium + 1000) / 12 / 10) * 10,
       offerings: ["Flexible rider coverage", "Adjust cover for inflation", "Zero cost option", "Delay 12 months Premium"],
     },
     {
       id: "hdfc",
-      insurer: "HDFC Life",
       productLabel: "HDFC Life",
       name: "HDFC Life Click 2 Protect Life",
-      iconBg: "#fff",
-      iconText: "H",
-      iconColor: "#c00",
+      logo: "/logos/hdfc.png",
       perYear: basePremium,
       perMonth: Math.round(basePremium / 12 / 10) * 10,
       offerings: ["Flexible rider coverage", "Adjust cover for inflation", "Zero cost option", "Delay 12 months Premium"],
     },
     {
       id: "icici",
-      insurer: "ICICI Prudential",
       productLabel: "ICICI Prudential",
       name: "ICICI Prudential smart",
-      iconBg: "#fff",
-      iconText: "I",
-      iconColor: "#e87722",
+      logo: "/logos/icici.png",
       perYear: basePremium - 1000,
       perMonth: Math.round((basePremium - 1000) / 12 / 10) * 10,
       offerings: ["Free health benefits", "Offers salaried discounts", "Strong Claim settlement record"],
@@ -1299,29 +1288,29 @@ function MultiPlanResults({ values }: { values: FormValues }) {
 
 function PlanCard({ plan }: { plan: Plan }) {
   return (
-    <div className="overflow-hidden rounded-[18px] border border-[#efefef] bg-white">
+    <div className="overflow-hidden rounded-[18px] border border-[#eee] bg-white">
       {/* Header */}
-      <div className="flex items-center gap-3 bg-[#f5faff] px-4 py-[14px]">
-        <div
-          className="flex h-[42px] w-[42px] shrink-0 items-center justify-center rounded-[10px] border border-[#e9eef5] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.03)]"
-        >
-          <span className="font-heading text-[18px] font-bold leading-none" style={{ color: plan.iconColor }}>
-            {plan.iconText}
-          </span>
+      <div className="flex items-center gap-3 bg-[#f8fbfe] px-4 py-[14px]">
+        <div className="flex h-[42px] w-[42px] shrink-0 items-center justify-center rounded-[10px] border border-[#f4f8fc] bg-white">
+          <Image
+            src={plan.logo}
+            alt={plan.productLabel}
+            width={28}
+            height={28}
+            className="h-[26px] w-auto object-contain"
+          />
         </div>
         <div className="min-w-0 flex-1">
-          <p className="font-heading text-[10px] font-medium uppercase tracking-wide text-[#8a8a8c]">
-            {plan.productLabel}
-          </p>
-          <p className="mt-[2px] truncate font-heading text-[15px] font-semibold leading-tight text-[#17191c]">
+          <p className="font-sans text-[11px] text-[#555]">{plan.productLabel}</p>
+          <p className="mt-[2px] truncate font-heading text-[16px] font-medium leading-tight tracking-[-0.32px] text-[#2e2e30]">
             {plan.name}
           </p>
         </div>
         <div className="shrink-0 text-right">
-          <p className="font-heading text-[15px] font-bold leading-none text-[#17191c]">
+          <p className="font-heading text-[15px] font-bold leading-none text-[#2e2e30]">
             ₹{plan.perYear.toLocaleString("en-IN")}/yr
           </p>
-          <p className="mt-[3px] font-heading text-[11px] leading-none text-[#79787b]">
+          <p className="mt-[3px] font-sans text-[11px] leading-none text-[#79787b]">
             ₹{plan.perMonth.toLocaleString("en-IN")}/mo
           </p>
         </div>
@@ -1329,8 +1318,8 @@ function PlanCard({ plan }: { plan: Plan }) {
 
       {/* Body */}
       <div className="px-4 pb-4 pt-3">
-        <p className="font-heading text-[12px] font-medium text-[#79787b]">Key offerings</p>
-        <div className="mt-2 flex flex-wrap gap-2">
+        <p className="font-heading text-[13px] font-medium text-[#79787b]">Key offerings</p>
+        <div className="mt-2.5 flex flex-wrap gap-2">
           {plan.offerings.map((o) => (
             <span
               key={o}
@@ -1341,26 +1330,26 @@ function PlanCard({ plan }: { plan: Plan }) {
           ))}
         </div>
 
-        <div className="mt-[14px] h-px w-full bg-[#f1f1f1]" />
+        <div className="mt-[14px] h-px w-full bg-[#eee]" />
 
         {/* Action buttons */}
         <div className="mt-3 flex gap-2.5">
           <button
             type="button"
-            className="flex h-[38px] flex-1 items-center justify-center gap-1.5 rounded-[10px] bg-[#e5f0ff] font-heading text-[13px] font-medium text-[#066ce1] transition-colors hover:bg-[#d4e5fb]"
+            className="flex h-[44px] flex-1 items-center justify-center gap-1.5 rounded-[11px] border border-[#dff0ff] bg-[#eef5fb] font-heading text-[14px] font-medium text-[#005cc6] transition-colors hover:bg-[#dfeaf7]"
           >
             Plan Details
-            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden>
               <rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>
               <path d="M5 6h6M5 9h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
             </svg>
           </button>
           <button
             type="button"
-            className="flex h-[38px] flex-1 items-center justify-center gap-1.5 rounded-[10px] bg-ditto-blue font-heading text-[13px] font-medium text-white transition-colors hover:bg-ditto-blue-dark"
+            className="flex h-[44px] flex-1 items-center justify-center gap-1.5 rounded-[11px] bg-[#087bf6] font-heading text-[14px] font-medium text-white transition-colors hover:bg-[#005cc6]"
           >
             Buy Now
-            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden>
               <path d="M2 3h2l1.5 8h7l1.5-6H5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               <circle cx="6" cy="13.5" r="1" fill="currentColor"/>
               <circle cx="12" cy="13.5" r="1" fill="currentColor"/>
@@ -1376,26 +1365,8 @@ function PlanCard({ plan }: { plan: Plan }) {
 
 function CloudflareMock() {
   return (
-    <div className="flex h-[52px] items-center justify-between rounded-[8px] border border-[#dedede] bg-[#f9f9f9] px-3 lg:h-[50px] lg:w-[220px]">
-      <div className="flex items-center gap-2.5">
-        <span className="flex h-[22px] w-[22px] items-center justify-center rounded-full bg-[#1fa24a]">
-          <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />
-        </span>
-        <span className="font-heading text-[13px] font-medium text-[#2e2e30]">Success!</span>
-      </div>
-      <div className="flex flex-col items-end">
-        <div className="flex items-center gap-1">
-          <span className="font-heading text-[9px] font-bold tracking-wide text-[#f38020]">CLOUDFLARE</span>
-          <svg width="14" height="10" viewBox="0 0 20 14" fill="none" aria-hidden>
-            <path d="M10 1c-2 0-4 1-5 3-1-0.5-3 0-3.5 2-0.5 2 1 3 2 3h12c1.5 0 3-1 3-2.5S17 4 15 4.5C14 2 12 1 10 1z" fill="#f38020"/>
-          </svg>
-        </div>
-        <div className="flex gap-1.5 text-[8px] text-[#79787b]">
-          <span>Privacy</span>
-          <span>•</span>
-          <span>Help</span>
-        </div>
-      </div>
+    <div className="relative h-[63px] w-[265px] max-w-full overflow-hidden rounded-[6px]">
+      <Image src="/logos/cloudflare-captcha.png" alt="Cloudflare captcha" fill className="object-contain object-left" />
     </div>
   );
 }
@@ -1404,13 +1375,13 @@ function CloudflareMock() {
 
 function InsurerSpecificSection() {
   const items = [
-    { id: "hdfc", label: "HDFC Term Insurance Premium Calculator", icon: "H", color: "#c00" },
-    { id: "icici", label: "ICICI Term Insurance Premium Calculator", icon: "I", color: "#e87722" },
-    { id: "axis", label: "Axis Term Insurance Premium Calculator", icon: "A", color: "#ae275f" },
+    { id: "hdfc", label: "HDFC Term Insurance Premium Calculator", logo: "/logos/hdfc.png" },
+    { id: "icici", label: "ICICI Term Insurance Premium Calculator", logo: "/logos/icici.png" },
+    { id: "axis", label: "Axis Term Insurance Premium Calculator", logo: "/logos/axis.png" },
   ];
   return (
     <div className="mt-10 w-full lg:mt-12 lg:w-[621px]">
-      <h2 className="font-heading text-[18px] font-semibold tracking-tight text-[#2e2e30] lg:text-[20px]">
+      <h2 className="font-heading text-[18px] font-semibold tracking-tight text-[#17191c] lg:text-[20px]">
         Insurer-Specific Term Insurance Calculators
       </h2>
       <div className="mt-4 flex flex-col gap-3">
@@ -1418,13 +1389,10 @@ function InsurerSpecificSection() {
           <a
             key={item.id}
             href="#"
-            className="flex items-center gap-3 rounded-[16px] border border-[#efefef] bg-white px-4 py-4 transition-shadow hover:shadow-[0_4px_18px_rgba(0,0,0,0.05)]"
+            className="flex items-center gap-3 rounded-[16px] border border-[#eee] bg-white px-4 py-4 transition-shadow hover:shadow-[0_4px_18px_rgba(0,0,0,0.05)]"
           >
-            <span
-              className="flex h-[32px] w-[32px] items-center justify-center rounded-[7px] border border-[#f0f0f0] bg-white font-heading text-[14px] font-bold"
-              style={{ color: item.color }}
-            >
-              {item.icon}
+            <span className="flex h-[36px] w-[36px] shrink-0 items-center justify-center rounded-[8px] border border-[#f4f8fc] bg-white">
+              <Image src={item.logo} alt="" width={24} height={24} className="h-[22px] w-auto object-contain" />
             </span>
             <span className="flex-1 font-heading text-[15px] font-medium text-[#2e2e30] lg:text-[16px]">
               {item.label}
