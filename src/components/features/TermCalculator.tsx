@@ -168,13 +168,7 @@ export function TermCalculator() {
       </div>
 
       <div className="mx-auto w-full max-w-[1300px] px-4 lg:px-[140px] lg:pt-10">
-        <h1 className="flex items-center gap-2 font-heading text-[18px] font-semibold tracking-tight text-[#2e2e30] lg:gap-3 lg:text-[26px]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/icons/calculator.png"
-            alt=""
-            className="h-7 w-7 object-contain lg:h-10 lg:w-10"
-          />
+        <h1 className="font-heading text-[18px] font-semibold tracking-tight text-[#2e2e30] lg:text-[26px]">
           Term Insurance Premium Calculator
         </h1>
 
@@ -1141,22 +1135,13 @@ function IncomeSelect({
 function EmptyResultCard() {
   return (
     <div className="flex min-h-[260px] w-full flex-col items-center justify-center rounded-[24px] border border-white bg-white px-6 py-10 backdrop-blur-[26px] lg:min-h-[316px] lg:rounded-[30px] lg:px-6 lg:py-[61px]">
-      <div
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/icons/calculator.png"
+        alt=""
         aria-hidden
-        className="flex h-[108px] w-[108px] items-center justify-center rounded-[20px] bg-gradient-to-br from-[#ffeab3] to-[#ffc24e] shadow-[0_8px_20px_rgba(255,178,0,0.18)]"
-      >
-        <svg width="56" height="56" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="8" y="6" width="48" height="52" rx="6" fill="#2a2a2a" />
-          <rect x="14" y="12" width="36" height="10" rx="2" fill="#f6f6f6" />
-          <text x="44" y="20" fontSize="8" fontFamily="ui-monospace" fontWeight="700" fill="#fff">%</text>
-          <rect x="14" y="28" width="8" height="8" rx="2" fill="#444" />
-          <rect x="26" y="28" width="8" height="8" rx="2" fill="#444" />
-          <rect x="38" y="28" width="8" height="8" rx="2" fill="#ff8c1a" />
-          <rect x="14" y="40" width="8" height="8" rx="2" fill="#444" />
-          <rect x="26" y="40" width="8" height="8" rx="2" fill="#444" />
-          <rect x="38" y="40" width="8" height="8" rx="2" fill="#444" />
-        </svg>
-      </div>
+        className="h-[96px] w-[96px] object-contain lg:h-[108px] lg:w-[108px]"
+      />
       <p className="mt-6 max-w-[283px] text-center font-sans text-[16px] leading-[1.41] text-[#79787b] lg:text-[19px]">
         Fill in the input fields to get your Term insurance premium
       </p>
