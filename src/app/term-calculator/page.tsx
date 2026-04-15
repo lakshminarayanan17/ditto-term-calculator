@@ -1,5 +1,10 @@
+import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { TermCalculator } from "@/components/features/TermCalculator";
+
+export const metadata: Metadata = {
+  title: "Ditto Term Calculator",
+};
 
 export default function TermCalculatorPage() {
   return (
