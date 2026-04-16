@@ -1140,7 +1140,7 @@ function EmptyResultCard() {
         src="/images/calculator.gif"
         alt=""
         aria-hidden
-        className="h-[101px] w-[101px] object-contain lg:h-[113px] lg:w-[113px]"
+        className="h-[106px] w-[106px] object-contain lg:h-[118px] lg:w-[118px]"
       />
       <p className="mt-6 max-w-[283px] text-center font-sans text-[16px] leading-[1.41] text-[#79787b] lg:text-[19px]">
         Fill in the input fields to get your Term insurance premium
