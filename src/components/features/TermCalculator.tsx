@@ -1313,7 +1313,7 @@ function PlanCard({ plan }: { plan: Plan }) {
           {plan.offerings.map((o) => (
             <span
               key={o}
-              className="rounded-[8px] bg-[#f5f5f5] px-3 py-[7px] font-heading text-[12px] leading-tight text-[#2e2e30]"
+              className="rounded-[8px] bg-[#f5f5f5] px-3 py-[7px] font-heading text-[13px] leading-tight text-[#2e2e30]"
             >
               {o}
             </span>
