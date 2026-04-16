@@ -179,10 +179,10 @@ export function TermCalculator() {
 
         <form
           onSubmit={handleSubmit}
-          className="mt-5 hidden flex-col gap-5 lg:mt-6 lg:flex lg:flex-row lg:items-start lg:justify-center lg:gap-10"
+          className="mt-5 hidden flex-col gap-5 lg:mt-6 lg:flex lg:flex-row lg:items-start lg:justify-center lg:gap-9"
         >
           {/* ── Left: Calculator Form ── */}
-          <div className="relative w-full overflow-hidden rounded-[24px] border border-white bg-[rgba(255,255,255,0.94)] p-5 backdrop-blur-[26px] lg:w-[540px] lg:shrink-0 lg:rounded-[36px] lg:p-0">
+          <div className="relative w-full overflow-hidden rounded-[24px] border border-white bg-[rgba(255,255,255,0.94)] p-5 backdrop-blur-[26px] lg:w-[621px] lg:shrink-0 lg:rounded-[36px] lg:p-0">
             <div className="lg:px-[38px] lg:pt-[30px] lg:pb-[30px]">
               {/* Orange pill */}
               <div className="inline-flex items-center gap-1.5 rounded-[10px] bg-[#fff8f3] px-2 py-1.5">
@@ -200,7 +200,7 @@ export function TermCalculator() {
 
               {/* Gender + Age */}
               <div className="grid grid-cols-1 gap-5 pt-5 lg:grid-cols-2 lg:gap-x-[44px] lg:pt-5">
-                <FieldBlock label="Gender">
+                <FieldBlock label="Gender" icon={<PersonIcon size={18} />}>
                   <RadioGroup
                     name="gender"
                     value={values.gender}
@@ -211,7 +211,7 @@ export function TermCalculator() {
                     ]}
                   />
                 </FieldBlock>
-                <FieldBlock label="Age" info>
+                <FieldBlock label="Age" info icon={<PinIcon size={18} />}>
                   <NumberStepper
                     value={values.age}
                     min={AGE_MIN}
@@ -226,7 +226,7 @@ export function TermCalculator() {
 
               {/* NRI + Tobacco */}
               <div className="grid grid-cols-1 gap-5 pt-5 lg:grid-cols-2 lg:gap-x-[44px]">
-                <FieldBlock label="Are you an NRI?">
+                <FieldBlock label="Are you an NRI?" icon={<GlobeIcon size={18} />}>
                   <RadioGroup
                     name="nri"
                     value={values.nri}
@@ -237,7 +237,7 @@ export function TermCalculator() {
                     ]}
                   />
                 </FieldBlock>
-                <FieldBlock label="Consume tobacco?">
+                <FieldBlock label="Consume tobacco?" icon={<SmokeIcon size={18} />}>
                   <RadioGroup
                     name="tobacco"
                     value={values.tobacco}
@@ -297,14 +297,14 @@ export function TermCalculator() {
 
               {/* Education + Employment */}
               <div className="grid grid-cols-1 gap-5 pt-5 lg:grid-cols-2 lg:gap-x-[44px]">
-                <FieldBlock label="Education">
+                <FieldBlock label="Education" icon={<CapIcon size={18} />}>
                   <Select
                     value={values.education}
                     onChange={(v) => set("education", v as Education)}
                     options={EDUCATION_OPTIONS}
                   />
                 </FieldBlock>
-                <FieldBlock label="Employment Type">
+                <FieldBlock label="Employment Type" icon={<BriefcaseIcon size={18} />}>
                   <Select
                     value={values.employment}
                     onChange={(v) => set("employment", v as Employment)}
@@ -317,7 +317,7 @@ export function TermCalculator() {
 
               {/* Pincode + Annual Income */}
               <div className="grid grid-cols-1 gap-5 pt-5 lg:grid-cols-2 lg:gap-x-[44px]">
-                <FieldBlock label="Pincode" info>
+                <FieldBlock label="Pincode" info icon={<PinIcon size={18} />}>
                   <input
                     type="text"
                     inputMode="numeric"
@@ -339,7 +339,7 @@ export function TermCalculator() {
                     </p>
                   )}
                 </FieldBlock>
-                <FieldBlock label="Annual Income" info>
+                <FieldBlock label="Annual Income" info icon={<RupeeIcon size={18} />}>
                   <IncomeSelect
                     value={values.income}
                     onChange={(v) => set("income", v)}
@@ -380,7 +380,7 @@ export function TermCalculator() {
           </div>
 
           {/* ── Right: Result / Empty State ── */}
-          <div className="w-full lg:w-[540px] lg:shrink-0" id="result-card">
+          <div className="w-full lg:w-[503px] lg:shrink-0" id="result-card">
             {status === "idle" && <EmptyResultCard />}
             {status === "loading" && <LoadingResultCard />}
             {status === "results" && <MultiPlanResults values={values} />}
@@ -796,39 +796,39 @@ function RangeSlider({
 
 /* ─── Mobile Inline Icons ─── */
 
-function PersonIcon() {
+function PersonIcon({ size = 14 }: { size?: number } = {}) {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" strokeWidth="1.75"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"/></svg>
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" strokeWidth="1.75"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"/></svg>
   );
 }
-function GlobeIcon() {
+function GlobeIcon({ size = 14 }: { size?: number } = {}) {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.75"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" stroke="currentColor" strokeWidth="1.75"/></svg>
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.75"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" stroke="currentColor" strokeWidth="1.75"/></svg>
   );
 }
-function SmokeIcon() {
+function SmokeIcon({ size = 14 }: { size?: number } = {}) {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M3 17h14v3H3zM17 17v3M20 13v7" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"/><path d="M17 13c2-1 2-3 0-4s-2-3 0-4" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"/></svg>
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"><path d="M3 17h14v3H3zM17 17v3M20 13v7" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"/><path d="M17 13c2-1 2-3 0-4s-2-3 0-4" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"/></svg>
   );
 }
-function PinIcon() {
+function PinIcon({ size = 14 }: { size?: number } = {}) {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 22s-7-7-7-12a7 7 0 1114 0c0 5-7 12-7 12z" stroke="currentColor" strokeWidth="1.75"/><circle cx="12" cy="10" r="2.5" stroke="currentColor" strokeWidth="1.75"/></svg>
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"><path d="M12 22s-7-7-7-12a7 7 0 1114 0c0 5-7 12-7 12z" stroke="currentColor" strokeWidth="1.75"/><circle cx="12" cy="10" r="2.5" stroke="currentColor" strokeWidth="1.75"/></svg>
   );
 }
-function BriefcaseIcon() {
+function BriefcaseIcon({ size = 14 }: { size?: number } = {}) {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="7" width="18" height="13" rx="2" stroke="currentColor" strokeWidth="1.75"/><path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2" stroke="currentColor" strokeWidth="1.75"/></svg>
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"><rect x="3" y="7" width="18" height="13" rx="2" stroke="currentColor" strokeWidth="1.75"/><path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2" stroke="currentColor" strokeWidth="1.75"/></svg>
   );
 }
-function RupeeIcon() {
+function RupeeIcon({ size = 14 }: { size?: number } = {}) {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 4h12M6 8h12M8 4c4 0 6 2 6 5s-2 5-6 5h-2l8 6" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/></svg>
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"><path d="M6 4h12M6 8h12M8 4c4 0 6 2 6 5s-2 5-6 5h-2l8 6" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/></svg>
   );
 }
-function CapIcon() {
+function CapIcon({ size = 14 }: { size?: number } = {}) {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M2 10l10-5 10 5-10 5L2 10z" stroke="currentColor" strokeWidth="1.75" strokeLinejoin="round"/><path d="M6 12v5c0 1 3 3 6 3s6-2 6-3v-5" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"/></svg>
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"><path d="M2 10l10-5 10 5-10 5L2 10z" stroke="currentColor" strokeWidth="1.75" strokeLinejoin="round"/><path d="M6 12v5c0 1 3 3 6 3s6-2 6-3v-5" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"/></svg>
   );
 }
 
@@ -843,23 +843,34 @@ function Divider({ className = "" }: { className?: string }) {
 function FieldBlock({
   label,
   info,
+  icon,
   children,
 }: {
   label: string;
   info?: boolean;
+  icon?: React.ReactNode;
   children: React.ReactNode;
 }) {
   return (
     <div>
-      <LabelWithInfo label={label} info={info} />
+      <LabelWithInfo label={label} info={info} icon={icon} />
       <div className="mt-2.5">{children}</div>
     </div>
   );
 }
 
-function LabelWithInfo({ label, info }: { label: string; info?: boolean }) {
+function LabelWithInfo({
+  label,
+  info,
+  icon,
+}: {
+  label: string;
+  info?: boolean;
+  icon?: React.ReactNode;
+}) {
   return (
     <div className="flex items-center gap-1.5">
+      {icon && <span className="text-[#2e2e30]">{icon}</span>}
       <span className="font-heading text-[16px] font-medium tracking-tight text-[#2e2e30] lg:text-[18px]">
         {label}
       </span>
@@ -1370,7 +1381,7 @@ function InsurerSpecificSection() {
     { id: "axis", label: "Axis Term Insurance Premium Calculator", logo: "/logos/axis.png" },
   ];
   return (
-    <div className="mt-10 w-full lg:mt-12 lg:w-[540px]">
+    <div className="mt-10 w-full lg:mt-12 lg:w-[621px]">
       <h2 className="font-heading text-[18px] font-semibold tracking-tight text-[#17191c] lg:text-[20px]">
         Insurer-Specific Term Insurance Calculators
       </h2>
