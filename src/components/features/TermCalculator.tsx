@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { Flame, ChevronDown, ChevronUp, Info, Check } from "lucide-react";
+import { ChevronDown, ChevronUp, Info, Check } from "lucide-react";
 
 /* ─── Types ─── */
 
@@ -161,7 +161,8 @@ export function TermCalculator() {
     <div className="min-h-screen bg-[#f9f9f9] pb-16">
       {/* Mobile lock-in banner (only mobile) */}
       <div className="flex items-center justify-center gap-1.5 px-4 pb-2 pt-5 lg:hidden">
-        <Flame className="h-[14px] w-[14px] text-[#f56301]" fill="#f56301" strokeWidth={1.5} />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/icons/flame.svg" alt="" aria-hidden className="h-[14px] w-[14px]" />
         <span className="font-heading text-[13px] font-medium tracking-tight text-[#f56301]">
           Lock in before the price hike.
         </span>
@@ -187,7 +188,8 @@ export function TermCalculator() {
             <div className="lg:px-[38px] lg:pt-[30px] lg:pb-[30px]">
               {/* Orange pill */}
               <div className="inline-flex items-center gap-1.5 rounded-[10px] bg-[#fff8f3] px-2 py-1.5">
-                <Flame className="h-[15px] w-[15px] text-[#f56301]" fill="#f56301" strokeWidth={1.5} />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/icons/flame.svg" alt="" aria-hidden className="h-[15px] w-[15px]" />
                 <span className="font-heading text-[14px] font-medium tracking-tight text-[#f56301] lg:text-[16px]">
                   Lock in before the price hike
                 </span>
