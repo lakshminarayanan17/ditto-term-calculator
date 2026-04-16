@@ -1137,7 +1137,7 @@ function EmptyResultCard() {
     <div className="flex min-h-[260px] w-full flex-col items-center justify-center rounded-[24px] border border-white bg-white px-6 py-10 backdrop-blur-[26px] lg:min-h-[316px] lg:rounded-[30px] lg:px-6 lg:py-[61px]">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/icons/calculator.png"
+        src="/images/calculator.gif"
         alt=""
         aria-hidden
         className="h-[96px] w-[96px] object-contain lg:h-[108px] lg:w-[108px]"
