@@ -731,7 +731,7 @@ function MobileAccordion({
         </div>
         {edited && !open && (
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
-            <path d="M12 20h9M16.5 3.5a2.121 2.121 0 113 3L7 19l-4 1 1-4 12.5-12.5z" stroke="#79787b" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M12 20h9M16.5 3.5a2.121 2.121 0 113 3L7 19l-4 1 1-4 12.5-12.5z" stroke="#79787b" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         )}
       </button>
@@ -798,37 +798,37 @@ function RangeSlider({
 
 function PersonIcon({ size = 14 }: { size?: number } = {}) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" strokeWidth="1.75"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"/></svg>
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" strokeWidth="1.5"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
   );
 }
 function GlobeIcon({ size = 14 }: { size?: number } = {}) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.75"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" stroke="currentColor" strokeWidth="1.75"/></svg>
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" stroke="currentColor" strokeWidth="1.5"/></svg>
   );
 }
 function SmokeIcon({ size = 14 }: { size?: number } = {}) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"><path d="M3 17h14v3H3zM17 17v3M20 13v7" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"/><path d="M17 13c2-1 2-3 0-4s-2-3 0-4" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"/></svg>
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"><path d="M3 17h14v3H3zM17 17v3M20 13v7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/><path d="M17 13c2-1 2-3 0-4s-2-3 0-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
   );
 }
 function PinIcon({ size = 14 }: { size?: number } = {}) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"><path d="M12 22s-7-7-7-12a7 7 0 1114 0c0 5-7 12-7 12z" stroke="currentColor" strokeWidth="1.75"/><circle cx="12" cy="10" r="2.5" stroke="currentColor" strokeWidth="1.75"/></svg>
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"><path d="M12 22s-7-7-7-12a7 7 0 1114 0c0 5-7 12-7 12z" stroke="currentColor" strokeWidth="1.5"/><circle cx="12" cy="10" r="2.5" stroke="currentColor" strokeWidth="1.5"/></svg>
   );
 }
 function BriefcaseIcon({ size = 14 }: { size?: number } = {}) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"><rect x="3" y="7" width="18" height="13" rx="2" stroke="currentColor" strokeWidth="1.75"/><path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2" stroke="currentColor" strokeWidth="1.75"/></svg>
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"><rect x="3" y="7" width="18" height="13" rx="2" stroke="currentColor" strokeWidth="1.5"/><path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2" stroke="currentColor" strokeWidth="1.5"/></svg>
   );
 }
 function RupeeIcon({ size = 14 }: { size?: number } = {}) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"><path d="M6 4h12M6 8h12M8 4c4 0 6 2 6 5s-2 5-6 5h-2l8 6" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/></svg>
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"><path d="M6 4h12M6 8h12M8 4c4 0 6 2 6 5s-2 5-6 5h-2l8 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
   );
 }
 function CapIcon({ size = 14 }: { size?: number } = {}) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"><path d="M2 10l10-5 10 5-10 5L2 10z" stroke="currentColor" strokeWidth="1.75" strokeLinejoin="round"/><path d="M6 12v5c0 1 3 3 6 3s6-2 6-3v-5" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"/></svg>
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"><path d="M2 10l10-5 10 5-10 5L2 10z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/><path d="M6 12v5c0 1 3 3 6 3s6-2 6-3v-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
   );
 }
 
@@ -1399,7 +1399,7 @@ function InsurerSpecificSection() {
               {item.label}
             </span>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
-              <path d="M5 12h14M13 6l6 6-6 6" stroke="#2e2e30" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M5 12h14M13 6l6 6-6 6" stroke="#2e2e30" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </a>
         ))}
